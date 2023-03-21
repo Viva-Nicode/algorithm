@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 int Euclid(int a, int b)
@@ -9,9 +8,16 @@ int Euclid(int a, int b)
     return Euclid(b, a % b);
 }
 
-int main(int argc, char const *argv[])
+void assertInt(int (*fp)(int, int), int a, int b, int expectation)
 {
-    printf("%d", Euclid(90, 5));
-    return 0;
+    if (fp(a, b) == expectation)
+        printf("suc");
+    else
+        printf("fail");
 }
 
+int main(int argc, char const *argv[])
+{
+    assertInt(Euclid, 24, 14, 2);
+    return 0;
+}
