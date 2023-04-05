@@ -9,7 +9,9 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/a.out"
+                "${fileDirname}/a.out",
+                "-L/opt/homebrew/Cellar/cunit/2.1-3/lib",
+                "-lcunit"
             ],
             "options": {
                 "cwd": "${fileDirname}"
