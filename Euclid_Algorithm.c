@@ -2,14 +2,14 @@
 #include <time.h>
 #include <stdlib.h>
 
-int Euclidean_Algorithm_Using_RecursiveCall(int a, int b)
+volatile int Euclidean_Algorithm_Using_RecursiveCall(int a, int b)
 {
     if (b <= 0)
         return a;
     return Euclidean_Algorithm_Using_RecursiveCall(b, a % b);
 }
 
-int Euclidean_Algorithm_Using_Roop(int a, int b)
+volatile int Euclidean_Algorithm_Using_Roop(int a, int b)
 {
     int n;
 
