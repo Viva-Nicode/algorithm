@@ -8,6 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "./Euclid_Algorithm.c",
                 "-o",
                 "${fileDirname}/a.out",
                 "-L/opt/homebrew/Cellar/cunit/2.1-3/lib",

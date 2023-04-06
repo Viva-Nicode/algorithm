@@ -1,23 +1,32 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
-int Euclid(int a, int b)
+int Euclidean_Algorithm_Using_RecursiveCall(int a, int b)
 {
-    printf("(%d, %d)\n", a, b);
     if (b <= 0)
         return a;
-    return Euclid(b, a % b);
+    return Euclidean_Algorithm_Using_RecursiveCall(b, a % b);
 }
 
-void assertInt(int (*fp)(int, int), int a, int b, int expectation)
+int Euclidean_Algorithm_Using_Roop(int a, int b)
 {
-    if (fp(a, b) == expectation)
-        printf("suc");
-    else
-        printf("fail");
+    int n;
+
+    if (a < b)
+        a ^= b ^= a ^= b;
+
+    while (b != 0)
+    {
+        n = a % b;
+        a = b;
+        b = n;
+    }
+    return a;
 }
 
-int main(int argc, char const *argv[])
+int getRandNum()
 {
-    assertInt(Euclid, 24, 14, 2);
-    return 0;
+    srand(time(NULL));
+    return rand() % 100000 + 1;
 }
