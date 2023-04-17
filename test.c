@@ -28,7 +28,7 @@ void EqualResultTest()
 void register_test_suite()
 {
     // 아마도 스위트 객체를 반환하는 팩토리 메서드
-    CU_pSuite suite = CU_add_suite("Euclid Test Suite", setup_init_randnum_Matrix, NULL);
+    CU_pSuite suite = CU_add_suite("Euclid Test Suite", setup_init_randnum_Matrix, NULL); 
     CU_add_test(suite, "test_Euclid", EqualResultTest);
 }
 

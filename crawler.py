@@ -2,6 +2,7 @@ import os
 import sys
 import urllib.request
 from selenium import webdriver
+
 client_id = "FSVA686XU5QtPu1fj340"
 client_secret = "eP_ItYrn60"
 encText = urllib.parse.quote("wastepaper")
