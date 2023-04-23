@@ -6,3 +6,4 @@ int Euclidean_Algorithm_Using_Roop(int a, int b);
 
 // 1 ~ 100k 난수 생성
 int getRandNum();
+
