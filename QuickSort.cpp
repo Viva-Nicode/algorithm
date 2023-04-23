@@ -41,5 +41,8 @@ int main(int argc, char const *argv[])
 
     quickSort(arr, 0, arr.size() - 1);
 
+    for (auto e : arr)
+        std::cout << e << " ";
+
     return 0;
 }
