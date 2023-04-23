@@ -20,13 +20,7 @@ int partition(std::vector<T> &arr, int li, int ri)
     }
     std::swap(arr[i + 1], arr[ri]); // pivot가장 오른쪽에 피봇과 i + 1값 스왑
 
-    for (T a : arr)
-    {
-        std::cout << a << " ";
-    }
-    std::cout<<std::endl;
-
-    return i + 1; // pivot의 위치 반환
+    return i + 1; // pivot 위치 반환
 }
 
 // Quick Sort 함수
@@ -35,9 +29,9 @@ void quickSort(std::vector<T> &arr, int li, int ri)
 {
     if (li < ri)
     {
-        int pi = partition(arr, li, ri); // 배열을 분할하고, pivot의 위치를 반환
-        quickSort(arr, li, pi - 1);      // 왼쪽 부분 배열을 Quick Sort
-        quickSort(arr, pi + 1, ri);      // 오른쪽 부분 배열을 Quick Sort
+        int pi = partition(arr, li, ri); // 피봇기준 정렬
+        quickSort(arr, li, pi - 1);      // small group quick sort
+        quickSort(arr, pi + 1, ri);      // large group quick sort
     }
 }
 
@@ -46,12 +40,6 @@ int main(int argc, char const *argv[])
     std::vector<int> arr{5, 4, 6, 2, 1, 7, 3, 91};
 
     quickSort(arr, 0, arr.size() - 1);
-
-    for (int i = 0; i < arr.size(); i++)
-    {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
 
     return 0;
 }
