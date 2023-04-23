@@ -2,7 +2,7 @@
 #include <iostream>
 
 // 배열을 분할하는 함수
-template <typename T>
+template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
 int partition(std::vector<T> &arr, int li, int ri)
 {
     // 가장 마지막값을 피봇으로 선정
@@ -24,7 +24,7 @@ int partition(std::vector<T> &arr, int li, int ri)
 }
 
 // Quick Sort 함수
-template <typename T>
+template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
 void quickSort(std::vector<T> &arr, int li, int ri)
 {
     if (li < ri)
