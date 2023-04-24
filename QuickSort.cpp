@@ -13,10 +13,7 @@ int partition(std::vector<T> &arr, int li, int ri)
     for (int j = li; j < ri; j++)
     {
         if (arr[j] <= pivot)
-        {
-            i++;
-            std::swap(arr[i], arr[j]);
-        }
+            std::swap(arr[++i], arr[j]);
     }
     std::swap(arr[i + 1], arr[ri]); // pivot가장 오른쪽에 피봇과 i + 1값 스왑
 
