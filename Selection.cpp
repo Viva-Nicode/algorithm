@@ -4,45 +4,32 @@
 
 using namespace std;
 
-// 배열을 분할하는 함수
-template <typename T, typename = enable_if<is_arithmetic<T>::value>>
-int partition(vector<T> &arr, int li, int ri)
+int quickSelect(vector<int> v, int k)
 {
-    // 가장 마지막값을 피봇으로 선정
-    T pivot = arr[ri];
+    int pivot = v[0]; // 임의의 element를 pivot으로 설정
 
-    // pivot 기준으로 작은 값을 pivot 왼쪽, 큰 값을 pivot 오른쪽에 위치시킴
-    int i(li - 1); // 피봇보다 작은 값을 가장 좌측으로 이동시키고 1 증가시켜서 피봇이 삽입될 위치 추적
-    for (int j = li; j < ri; j++)
+    vector<int> A1, A2;
+
+    for (auto x : v)
     {
-        if (arr[j] <= pivot)
-            swap(arr[++i], arr[j]);
+        // pivot을 기준으로 element partitioning
+        if (x < pivot)
+            A1.push_back(x);
+        else if (x > pivot)
+            A2.push_back(x);
     }
-    swap(arr[i + 1], arr[ri]); // pivot가장 오른쪽에 피봇과 i + 1값 스왑
 
-    return i + 1; // pivot 위치 반환
-}
-
-// Quick Sort 함수
-int quickSort(vector<int> &arr, int li, int ri, int k)
-{
-    if (li < ri)
-    {
-        int pi = partition(arr, li, ri); // 피봇기준 정렬
-        if (pi - 1 >= k)
-            quickSort(arr, li, pi - 1, k); // small group quick sort
-        else if (pi - 1 <= k)
-            quickSort(arr, pi + 1, ri, k - (pi + 1)); // large group quick sort
-        else if(pi == k)
-            return arr[pi];
-    }
+    if (k <= A1.size()) // 찾고자 하는 answer가 A1에 있을 경우 subproblem 호출
+        return quickSelect(A1, k);
+    else if (k == A1.size() + 1) // 현재 problem의 answer가 pivot일 경우 반환
+        return pivot;
+    else // 찾고자 하는 answer가 A2에 있을 경우 subproblem 호출
+        return quickSelect(A2, k - (A1.size() + 1));
 }
 
 int main(int argc, char const *argv[])
 {
-    vector<int> arr{5, 4, 6, 2, 1, 7, 3, 91};
-
-    cout << quickSort(arr, 0, arr.size() - 1, 4);
-
+    vector<int> arr{5, 4, 6, 1, 7, 3, 91, 14, 5};
+    cout << quickSelect(arr, 4);
     return 0;
 }
