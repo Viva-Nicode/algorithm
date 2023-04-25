@@ -6,7 +6,8 @@
     ],
     "files.associations": {
         "euclid_algorithm.h": "c",
-        "vector": "cpp"
+        "vector": "cpp",
+        "type_traits": "cpp"
     }
 
 }
