@@ -3,9 +3,10 @@
 
 using namespace std;
 
-template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
+template <typename T, typename = enable_if<is_arithmetic<T>::value>>
 void merge(vector<T> &arr, int left, int middle, int right)
 {
+    cout << left << " " << middle << " " << right << endl;
     vector<T> temp(right - left + 1); // 임시 배열 생성
 
     int i = left;
@@ -35,7 +36,7 @@ void merge(vector<T> &arr, int left, int middle, int right)
         arr[left + x] = temp[x];
 }
 
-template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
+template <typename T, typename = enable_if<is_arithmetic<T>::value>>
 void mergeSort(vector<T> &arr, int left, int right)
 {
     if (left < right)

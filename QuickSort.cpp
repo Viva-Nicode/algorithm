@@ -24,6 +24,7 @@ int partition(std::vector<T> &arr, int li, int ri)
 template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
 void quickSort(std::vector<T> &arr, int li, int ri)
 {
+    
     if (li < ri)
     {
         int pi = partition(arr, li, ri); // 피봇기준 정렬
