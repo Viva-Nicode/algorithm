@@ -16,7 +16,7 @@ void merge(vector<T> &arr, int left, int middle, int right)
     int k = 0;
 
     // 작은 순서대로 배열에 삽입
-    // 한쪽이 먼저 전부 temp에 복사되면 다른 한쪽이 정렬되어야 하는 배열이 남음
+    // 한쪽이 먼저 전부 temp에 복사되면 다른 한쪽이 정렬되어야 하는 배열이 남아버림
     while (i <= middle && j <= right)
     {
         if (arr[i] <= arr[j])
@@ -25,7 +25,7 @@ void merge(vector<T> &arr, int left, int middle, int right)
             temp[k++] = arr[j++];
     }
 
-    // 남은 데이터도 삽입
+    // 그래서 남은 데이터도 삽입
     while (i <= middle)
         temp[k++] = arr[i++];
     while (j <= right)
@@ -36,16 +36,20 @@ void merge(vector<T> &arr, int left, int middle, int right)
         arr[left + x] = temp[x];
 }
 
+// T 타입을 산술 연산이 가능한 타입으로 제한
 template <typename T, typename = enable_if<is_arithmetic<T>::value>>
+// 매개변수 벡터를 수정해야 하므로 백터 참조자
 void mergeSort(vector<T> &arr, int left, int right)
 {
     if (left < right)
     {
         int middle = (left + right) / 2;
 
-        // Divide and Conquer
+        // 분할
         mergeSort(arr, left, middle);
         mergeSort(arr, middle + 1, right);
+
+        // 병합
         merge(arr, left, middle, right);
     }
 }
