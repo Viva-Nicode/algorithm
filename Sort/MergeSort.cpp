@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
+#include "util.cpp"
 
 using namespace std;
 
 template <typename T, typename = enable_if<is_arithmetic<T>::value>>
 void merge(vector<T> &arr, int left, int middle, int right)
 {
-    cout << left << " " << middle << " " << right << endl;
     vector<T> temp(right - left + 1); // 임시 배열 생성
 
     int i = left;
@@ -50,18 +50,21 @@ void mergeSort(vector<T> &arr, int left, int right)
     }
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
-    vector<int> arr = {5, 2, 8, 6, 1, 9, 3};
 
-    // Merge Sort 수행
-    mergeSort(arr, 0, arr.size() - 1);
+    // 1번째부터 실제 전달한 인자
+    if (argc <= 0)
+    {
+        cout << "실행하는데 필요한 매개변수 수가 부족합니다." << endl;
+        return -1;
+    }
 
-    // 정렬 결과 출력
-    for (int i = 0; i < arr.size(); i++)
-        cout << arr[i] << " ";
-
-    cout << endl;
+    const string targetPath = argv[1];
+    vector<int> result = split(readFromFile(argv[1]), ' ');
+    mergeSort(result, 0, result.size() - 1); // 정렬 실행
+    const string resultPath = targetPath.substr(0, targetPath.find_last_of("/") + 1) + "result.txt";
+    writeToFile(result, resultPath);
 
     return 0;
 }

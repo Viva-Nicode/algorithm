@@ -1,5 +1,11 @@
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include "util.cpp"
+
+using namespace std;
 
 // 배열을 분할하는 함수
 template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
@@ -24,7 +30,7 @@ int partition(std::vector<T> &arr, int li, int ri)
 template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
 void quickSort(std::vector<T> &arr, int li, int ri)
 {
-    
+
     if (li < ri)
     {
         int pi = partition(arr, li, ri); // 피봇기준 정렬
@@ -35,12 +41,18 @@ void quickSort(std::vector<T> &arr, int li, int ri)
 
 int main(int argc, char const *argv[])
 {
-    std::vector<int> arr{5, 4, 6, 2, 1, 7, 3, 91};
+    // 1번째부터 실제 전달한 인자
+    if (argc <= 0)
+    {
+        std::cout << "실행하는데 필요한 매개변수 수가 부족합니다." << std::endl;
+        return -1;
+    }
 
-    quickSort(arr, 0, arr.size() - 1);
-
-    for (auto e : arr)
-        std::cout << e << " ";
+    const string targetPath = argv[1];
+    vector<int> result = split(readFromFile(argv[1]), ' ');
+    quickSort(result, 0, result.size() - 1); // 정렬 실행
+    const string resultPath = targetPath.substr(0, targetPath.find_last_of("/") + 1) + "result.txt";
+    writeToFile(result, resultPath);
 
     return 0;
 }
