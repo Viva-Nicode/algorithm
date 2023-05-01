@@ -52,6 +52,7 @@ def strip_closest(strip, d):
 
 x = [10, 5, 20, 6, 9, 15, 8, 20, 17, 16, 7, 10, 1, 8, 30, 22]
 y = [15, 15, 3, 1, 7, 9, 15, 14, 13, 11, 12, 10, 19, 8, 9, 4]
+
 points = list(zip(x, y))
 points.sort()
 x = [p[0] for p in points]
