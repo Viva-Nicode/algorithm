@@ -1,9 +1,14 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <limits>
+#include <sstream>
+#include <string>
 #include <vector>
+
+#include "util.cpp"
 
 using namespace std;
 
@@ -13,6 +18,7 @@ class Point {
 
    public:
     Point(int x, int y) : x(x), y(y) {}
+
     int getX() const { return x; }
     int getY() const { return y; }
 
@@ -28,10 +34,9 @@ class Point {
 
 double_t brute_force(const vector<Point>& pv) {
     double_t least = numeric_limits<double>::max();
-    int32_t s = pv.size();
 
-    for (int i = 0; i < s; i++) {
-        for (int j = i + 1; j < s; j++) {
+    for (int i = 0; i < pv.size(); i++) {
+        for (int j = i + 1; j < pv.size(); j++) {
             if (double l = pv.at(i).getLength(pv.at(j)); l < least)
                 least = l;
         }
@@ -58,24 +63,21 @@ double_t closest_pair(const vector<Point>& pv) {
 }
 
 int main(int argc, char const* argv[]) {
-    vector<Point> v;
+    if (argc <= 1)
+        return -1;
 
-    v.push_back(Point(10, 15));
-    v.push_back(Point(5, 15));
-    v.push_back(Point(20, 3));
-    v.push_back(Point(6, 1));
-    v.push_back(Point(9, 7));
-    v.push_back(Point(15, 9));
-    v.push_back(Point(8, 15));
-    v.push_back(Point(20, 14));
-    v.push_back(Point(17, 13));
-    v.push_back(Point(16, 11));
-    v.push_back(Point(7, 12));
-    v.push_back(Point(10, 10));
-    v.push_back(Point(1, 19));
-    v.push_back(Point(8, 8));
-    v.push_back(Point(30, 9));
-    v.push_back(Point(22, 4));
+    vector<Point> v;
+    ifstream tfile(argv[1]);
+
+    if (tfile.is_open()) {
+        string line = "";
+        while (getline(tfile, line)) {
+            vector<int> iv = split(line, ' ');
+            v.push_back(Point(iv[0], iv[1]));
+        }
+        tfile.close();
+    } else
+        cout << "파일을 여는데 실패하였습니다." << endl;
 
     sort(v.begin(), v.end(), [](const Point& lhs, const Point& rhs) -> bool {
         if (lhs.getX() != rhs.getX())

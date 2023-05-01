@@ -51,7 +51,7 @@ void mergeSort(vector<T> &arr, int left, int right) {
 
 int main(int argc, char const *argv[]) {
     // 1번째부터 실제 전달한 인자
-    if (argc <= 0) {
+    if (argc <= 1) {
         cout << "실행하는데 필요한 매개변수 수가 부족합니다." << endl;
         return -1;
     }
@@ -59,8 +59,7 @@ int main(int argc, char const *argv[]) {
     const string targetPath = argv[1];
     vector<int> result = split(readFromFile(argv[1]), ' ');
     mergeSort(result, 0, result.size() - 1);  // 정렬 실행
-    const string resultPath =
-        targetPath.substr(0, targetPath.find_last_of("/") + 1) + "result.txt";
+    const string resultPath = targetPath.substr(0, targetPath.find_last_of("/") + 1) + "result.txt";
     writeToFile(result, resultPath);
 
     return 0;
