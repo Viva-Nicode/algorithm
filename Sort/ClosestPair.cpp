@@ -45,7 +45,7 @@ double_t brute_force(const vector<Point>& pv) {
 }
 
 double_t closest_pair(const vector<Point>& pv) {
-    if (pv.size() <= 3)
+        if (pv.size() <= 3)
         return brute_force(pv);
 
     double_t divided_l = closest_pair(vector<Point>(pv.begin(), pv.begin() + pv.size() / 2));

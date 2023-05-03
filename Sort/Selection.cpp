@@ -6,7 +6,7 @@
 
 using namespace std;
 
-template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
+template <typename T, typename = enable_if<is_arithmetic<T>::value>>
 int quickSelect(vector<T> v, int k) {
     T pivot = v[v.size() - 1];  // 가장 마지막 요소를 피봇으로 선정
 

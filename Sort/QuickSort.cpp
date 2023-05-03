@@ -9,8 +9,8 @@
 using namespace std;
 
 // 배열을 분할하는 함수
-template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
-int partition(std::vector<T> &arr, int li, int ri) {
+template <typename T, typename = enable_if<is_arithmetic<T>::value>>
+int partition(vector<T> &arr, int li, int ri) {
     // 가장 마지막값을 피봇으로 선정
     T pivot = arr[ri];
 
@@ -18,15 +18,15 @@ int partition(std::vector<T> &arr, int li, int ri) {
     int i(li - 1);  // 피봇보다 작은 값을 가장 좌측으로 이동시키고 1 증가시켜서 피봇이 삽입될 위치 추적
     for (int j = li; j < ri; j++) {
         if (arr[j] <= pivot)
-            std::swap(arr[++i], arr[j]);
+            swap(arr[++i], arr[j]);
     }
-    std::swap(arr[i + 1], arr[ri]);  // pivot가장 오른쪽에 피봇과 i + 1값 스왑
+    swap(arr[i + 1], arr[ri]);  // pivot가장 오른쪽에 피봇과 i + 1값 스왑
 
     return i + 1;  // pivot 위치 반환
 }
 
 // Quick Sort 함수
-template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
+template <typename T, typename = enable_if<is_arithmetic<T>::value>>
 void quickSort(std::vector<T> &arr, int li, int ri) {
     if (li < ri) {
         int pi = partition(arr, li, ri);  // 피봇기준 정렬
