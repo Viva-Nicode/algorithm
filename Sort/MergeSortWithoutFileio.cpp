@@ -1,11 +1,25 @@
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
+vector<int> getRandomVector() {
+    vector<int> vec(100000);
+    srand(time(nullptr));  // 시드 값 설정
+
+    for (int i = 0; i < 100000; i++)
+        vec[i] = rand() % 60000 + 1;  // 1부터 60000 사이의 난수 생성
+
+    return vec;
+}
+
+using namespace std;
+
 template <typename T, typename = enable_if<is_arithmetic<T>::value>>
 void merge(vector<T> &arr, int left, int middle, int right) {
-    cout << left << " " << middle << " " << right << " " << endl;
     vector<T> temp(right - left + 1);  // 정렬 & 병합할 임시 배열 생성
 
     int i = left;
@@ -48,13 +62,17 @@ void mergeSort(vector<T> &arr, int left, int right) {
 }
 
 int main(int argc, char const *argv[]) {
-    // 1번째부터 실제 전달한 인자
+    //길이가 100,000인 두 벡터
+    vector<int> result = getRandomVector();
+    vector<int> result2 = vector(result);
 
-    vector<int> result = vector({33, 44, 13, 233, 34, 441, 51, 62});
-    mergeSort(result, 0, result.size() - 1);  // 정렬 실행
 
-    for (auto i : result)
-        cout << i << " ";
+    mergeSort(result, 0, result.size() - 1);
+    sort(result2.begin(), result2.end());
+
+    if (result == result2)
+        cout << "result equals to sorted vectors" << endl;
+    
 
     return 0;
 }

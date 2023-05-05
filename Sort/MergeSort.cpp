@@ -16,8 +16,7 @@ void merge(vector<T> &arr, int left, int middle, int right) {
     int k = 0;
 
     // 작은 순서대로 배열에 삽입
-    // 한쪽이 먼저 전부 temp에 복사되면 다른 한쪽이 정렬되어야 하는 배열이
-    // 남아버림
+    // 한쪽이 먼저 전부 temp에 복사되면 다른 한쪽이 정렬되어야 하는 배열이 남아버림
     while (i <= middle && j <= right) {
         if (arr[i] <= arr[j])
             temp[k++] = arr[i++];
