@@ -1,20 +1,26 @@
 from PIL import Image
 import os
 
-merged_Dir = "/Users/nicode./Desktop/MergedDataSet/cardboard/"
-resized_Dir = "/Users/nicode./Desktop/ResizedDataSet/cardboard/"
-categori_name = 'cardboard'
-count = 1
 
-files = os.listdir(merged_Dir)
+print('hello')
+# origin_Dir = "/Users/nicode./Desktop/battery/"
+# resized_Dir = "/Users/nicode./Desktop/TrainSet/battery/"
+# categori_name = 'battery'
+# count = 1
 
-for filename in files:
-    img = Image.open(merged_Dir + filename)
-    resized_img = img.resize((224, 224))
-    #resized_img = resized_img.convert("RGB")
-    resized_img.save(resized_Dir + categori_name + str(count) + '.jpg')
-    count += 1
+# files = os.listdir(origin_Dir)
 
+# for filename in files:
+#     img = Image.open(origin_Dir + filename)
+#     resized_img = img.resize((224, 224))
+#     resized_img = resized_img.convert("RGB")
+#     resized_img.save(resized_Dir + categori_name + str(count) + '.jpg')
+#     count += 1
+
+# dir = "" "/Users/nicode./Desktop/evl.jpg"
+# img = Image.open(dir)
+# resized_img = img.resize((224, 224))
+# resized_img.save(dir  + 'e.jpg')
 # for file_name in files:
 #     os.rename(dir_path + '/' + file_name, dir_path+'/' +)
 

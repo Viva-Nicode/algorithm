@@ -1,13 +1,14 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 #include "util.cpp"
 
 using namespace std;
 
 template <typename T, typename = enable_if<is_arithmetic<T>::value>>
-int quickSelect(vector<T> v, int k) {
+int quickSelect(vector<T> &v, int k) {
     T pivot = v[v.size() - 1];  // 가장 마지막 요소를 피봇으로 선정
 
     vector<T> smallGroupV, largeGroupV;  // 각각 피봇보다 작은 벡터, 큰 벡터
@@ -31,13 +32,13 @@ int quickSelect(vector<T> v, int k) {
 int main(int argc, char const *argv[]) {
     
     if (argc <= 2) {
-        cout << "실행하는데 필요한 매개변수 수가 부족합니다." << endl;
+        cout << "required for execution args" << endl;
         return -1;
     }
 
     const string targetPath = argv[1];
     vector<int> result = split(readFromFile(argv[1]), ' ');
-    int r = quickSelect(result, stoi(argv[2]));
+    int r = quickSelect(result, atoi(argv[2]));
     const string resultPath = targetPath.substr(0, targetPath.find_last_of("/") + 1) + "result.txt";
     writeToFile(vector<int>({r}), resultPath);
 
