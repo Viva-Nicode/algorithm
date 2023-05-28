@@ -106,7 +106,7 @@ void huffman_decompression(const string compresed_filepath, const string decompr
 }
 
 int main(int argc, char const* argv[]) {
-    const string targetFilePath = "/Users/nicode./MainSpace/algorithm/Huffman_Compression/origin.txt";
+    const string targetFilePath = "/Users/nicode./MainSpace/algorithm/Huffman_Compression/origin3.txt";
     const string outputFilePath = "/Users/nicode./MainSpace/algorithm/Huffman_Compression/output";
     const string mappingTablePath = "/Users/nicode./MainSpace/algorithm/Huffman_Compression/table.txt";
     const string decompresedFilePath = "/Users/nicode./MainSpace/algorithm/Huffman_Compression/repl.txt";
