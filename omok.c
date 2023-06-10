@@ -46,18 +46,17 @@ bool bbbwPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
         if (count == 3 && (board[evex - dx[direction]][evey - dy[direction]] != stone))
             return true;
     }
-
     return false;
 }
 
-bool bbbPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
+bool bbPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
     int dx[] = {1, 1, 0, -1, 1, -1, 0, -1};  // 가로, 세로, 대각선 검사
     int dy[] = {0, 1, 1, 1, -1, -1, -1, 0};
 
     enum STONE stone = BLACK;  // 흑돌
     for (int d = 0; d < 8; ++d) {
         int count = 0;
-        for (int i = 1; i <= 3; ++i) {
+        for (int i = 1; i <= 2; ++i) {
             int nx = evex + dx[d] * i;
             int ny = evey + dy[d] * i;
             if (nx < 0 || nx >= LENGTH || ny < 0 || ny >= LENGTH)
@@ -70,11 +69,102 @@ bool bbbPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
                 break;
             }
         }
-        if (count == 3)
+        if (count == 2)
             return true;
     }
     return false;
 }
+
+bool bbbPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
+    int dx[] = {1, 1, 0, -1};  // 가로, 세로, 대각선 방향 검사
+    int dy[] = {0, 1, 1, 1};
+
+    enum STONE stone = BLACK;  // 흑돌
+    for (int d = 0; d < 4; ++d) {
+        int count = 0;
+        for (int i = -3; i <= 3; ++i) {
+            int nx = evex + dx[d] * i;
+            int ny = evey + dy[d] * i;
+            if (nx < 0 || nx >= LENGTH || ny < 0 || ny >= LENGTH)
+                continue;
+            if (board[nx][ny] == stone) {
+                ++count;
+                if (count == 3)
+                    return true;
+            } else {
+                count = 0;
+            }
+        }
+    }
+    return false;
+}
+
+bool bbbbPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
+    int dx[] = {1, 1, 0, -1};  // 가로, 세로, 대각선 방향 검사
+    int dy[] = {0, 1, 1, 1};
+
+    enum STONE stone = BLACK;  // 흑돌
+    for (int d = 0; d < 4; ++d) {
+        int count = 0;
+        for (int i = -4; i <= 4; ++i) {
+            int nx = evex + dx[d] * i;
+            int ny = evey + dy[d] * i;
+            if (nx < 0 || nx >= LENGTH || ny < 0 || ny >= LENGTH)
+                continue;
+            if (board[nx][ny] == stone) {
+                ++count;
+                if (count == 4)
+                    return true;
+            } else {
+                count = 0;
+            }
+        }
+    }
+    return false;
+}
+
+bool bbbbbPattern(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
+    int dx[] = {1, 1, 0, -1};  // 가로, 세로, 대각선 방향 검사
+    int dy[] = {0, 1, 1, 1};
+
+    enum STONE stone = BLACK;  // 흑돌
+    for (int d = 0; d < 4; ++d) {
+        int count = 0;
+        for (int i = -5; i <= 5; ++i) {
+            int nx = evex + dx[d] * i;
+            int ny = evey + dy[d] * i;
+            if (nx < 0 || nx >= LENGTH || ny < 0 || ny >= LENGTH)
+                continue;
+            if (board[nx][ny] == stone) {
+                ++count;
+                if (count == 5)
+                    return true;
+            } else {
+                count = 0;
+            }
+        }
+    }
+    return false;
+}
+
+int getWeight(enum STONE board[LENGTH][LENGTH], int x, int y){
+    int w = 0;
+    if(bbbwPattern(board, x,y)){
+        w = 10;
+    }
+
+    if(bbbwPattern(board, x,y)){
+        w = 20;
+    }
+    if(bbbbPattern(board, x,y)){
+        w = 30;
+    }
+
+    if(bbbbbPattern(board, x,y)){
+        w = 300;
+    }
+    return w;
+};
 
 // 알파가 큰거 베타가 작은거
 int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b, int evex, int evey) {
@@ -127,18 +217,8 @@ int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b, int evex, 
 int main(int argc, char const *argv[]) {
     enum STONE board[LENGTH][LENGTH] = {{
                                             BLACK,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                            NONE,
-                                        },
-                                        {
-                                            NONE,
+                                            BLACK,
+                                            BLACK,
                                             BLACK,
                                             NONE,
                                             NONE,
@@ -146,13 +226,23 @@ int main(int argc, char const *argv[]) {
                                             NONE,
                                             NONE,
                                             NONE,
+                                        },
+                                        {
+                                            NONE,
+                                            NONE,
+                                            NONE,
+                                            NONE,
+                                            NONE,
+                                            NONE,
+                                            NONE,
+                                            NONE,
                                             NONE,
                                             NONE,
                                         },
                                         {
                                             NONE,
                                             NONE,
-                                            BLACK,
+                                            NONE,
                                             NONE,
                                             NONE,
                                             NONE,
@@ -165,7 +255,7 @@ int main(int argc, char const *argv[]) {
                                             NONE,
                                             NONE,
                                             NONE,
-                                            WHITE,
+                                            NONE,
                                             NONE,
                                             NONE,
                                             NONE,
@@ -246,6 +336,6 @@ int main(int argc, char const *argv[]) {
                                             NONE,
                                         }};
 
-    printf("%d", bbbwPattern(board, 2, 2));
+    printf("%d", bbbbPattern(board, 0, 1));
     return 0;
 }
