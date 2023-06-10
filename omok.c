@@ -21,15 +21,15 @@ bool isindexoutofboundsexception(int x, int y) {
         return false;
 }
 
-int getWeight() {
+int getWeight(enum STONE board[LENGTH][LENGTH], int evex, int evey) {
     return 1;
 }
 
 // 알파가 큰거 베타가 작은거
-int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b) {
+int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b, int evex, int evey) {
     static int aix, aiy;
     if (depth == 3)
-        return getWeight();
+        return getWeight(board, evex, evey);
 
     if (depth % 2 == 0) {  // ai turn
 
@@ -52,7 +52,7 @@ int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b) {
                     }
                     if (flag) {
                         board[x][y] = BLACK;
-                        int w = turn(board, depth + 1, a, b);
+                        int w = turn(board, depth + 1, a, b, x, y);
                         if (*a < w) {
                             *a = w;
                             if (depth == 0) {
@@ -68,7 +68,7 @@ int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b) {
         for (int x = 0; x < LENGTH; x++)  // for each child of node
         {
             for (int y = 0; y < LENGTH; y++) {
-                return getWeight();
+                
             }
         }
     }
