@@ -25,13 +25,14 @@ int getWeight() {
     return 1;
 }
 
+// 알파가 큰거 베타가 작은거
 int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b) {
     static int aix, aiy;
     if (depth == 3)
         return getWeight();
 
     if (depth % 2 == 0) {  // ai turn
-        int v = INT_MIN;
+
         for (int x = 0; x < LENGTH; x++)  // for each child of node
         {
             for (int y = 0; y < LENGTH; y++) {
@@ -52,19 +53,23 @@ int turn(enum STONE board[LENGTH][LENGTH], int depth, int *a, int *b) {
                     if (flag) {
                         board[x][y] = BLACK;
                         int w = turn(board, depth + 1, a, b);
-                        if (v < w) {
-                            v = w;
+                        if (*a < w) {
+                            *a = w;
                             if (depth == 0) {
                                 aix = x;
                                 aiy = y;
                             }
                         }
-                        *a = max(*a, v);
                     }
                 }
             }
         }
-    } else {  // player turn
-        return getWeight();
+    } else {                              // player turn
+        for (int x = 0; x < LENGTH; x++)  // for each child of node
+        {
+            for (int y = 0; y < LENGTH; y++) {
+                return getWeight();
+            }
+        }
     }
 }
