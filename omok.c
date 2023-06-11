@@ -183,9 +183,9 @@ int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
     if (depth == 2)
         return getWeight(board, evex, evey);
 
-    int w = INT_MIN;
-    int mw = INT_MIN;
-    if (depth % 2 == 0) {  // ai turn
+    int maxw = INT_MIN;
+    int minw = INT_MAX;
+    if (depth == 0) {  // ai turn
 
         printf("AI\n");
         for (int x = 0; x < MAX_X; x++)  // for each child of node
@@ -207,9 +207,10 @@ int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
                     }
                     if (flag) {
                         board[x][y] = BLACK;
-                        int w = turn(board, depth + 1, x, y);
-                        if (mw < w) {
-                            mw = w;
+                        int ww = turn(board, depth + 1, x, y);
+                        minw = min(minw, ww);
+                        if (maxw < ww) {
+                            maxw = ww;
                             aix = x;
                             aiy = y;
                         }
@@ -218,7 +219,6 @@ int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
                 }
             }
         }
-        return mw;
     } else {  // player turn
 
         printf("P\n");
@@ -242,14 +242,15 @@ int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
                     if (flag) {
                         board[x][y] = WHITE;
                         int ww = turn(board, depth + 1, x, y);
-                        w = max(w, ww);
+                        maxw = max(maxw, ww);
+                        minw = min(minw, ww);
                         board[x][y] = EMPTY;
                     }
                 }
             }
         }
-        printf("w : %d\n", w);
-        return w;
+        printf("w : %d\n", minw);
+        return minw;
     }
 }
 
