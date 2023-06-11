@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "C/C++ Debug",
-            "program": "${workspaceFolder}/a.out",
+            "program": "${workspaceFolder}/omok.out",
             "args": [],
             "cwd": "${workspaceFolder}"
         }

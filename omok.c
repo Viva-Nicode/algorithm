@@ -30,7 +30,7 @@ int max(int a, int b) {
 }
 
 bool isindexoutofboundsexception(int x, int y) {
-    if (x < 0 || x > MAX_X || y < 0 || y > MAX_Y)
+    if (x < 0 || x >= MAX_X || y < 0 || y >= MAX_Y)
         return true;
     else
         return false;
@@ -199,10 +199,11 @@ int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
                     for (int k = 0; k < 8; k++) {
                         deltax = x + dx[k];
                         deltay = y + dy[k];
-                        if (!isindexoutofboundsexception(deltax, deltay)) continue;
-                        if (board[deltax][deltay] != EMPTY) {
-                            flag = true;
-                            break;
+                        if (!isindexoutofboundsexception(deltax, deltay)) {
+                            if (board[deltax][deltay] != EMPTY) {
+                                flag = true;
+                                break;
+                            }
                         }
                     }
                     if (flag) {
@@ -261,8 +262,8 @@ int main(int argc, char const* argv[]) {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
