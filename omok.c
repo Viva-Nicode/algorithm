@@ -234,10 +234,11 @@ int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
                     for (int k = 0; k < 8; k++) {
                         deltax = x + dx[k];
                         deltay = y + dy[k];
-                        if (!isindexoutofboundsexception(deltax, deltay)) continue;
-                        if (board[deltax][deltay] != EMPTY) {
-                            flag = 1;
-                            break;
+                        if (!isindexoutofboundsexception(deltax, deltay)) {
+                            if (board[deltax][deltay] != EMPTY) {
+                                flag = 1;
+                                break;
+                            }
                         }
                     }
                     if (flag) {
