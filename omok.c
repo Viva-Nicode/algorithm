@@ -180,12 +180,12 @@ int getWeight(int board[MAX_Y][MAX_X], int x, int y) {
 
 // 알파가 큰거 베타가 작은거
 int turn(int board[MAX_Y][MAX_X], int depth, int evex, int evey) {
-    if (depth == 2)
+    if (depth == 3)
         return getWeight(board, evex, evey);
 
     int maxw = INT_MIN;
     int minw = INT_MAX;
-    if (depth == 0) {  // ai turn
+    if (depth == 0 || depth == 2) {  // ai turn
 
         printf("AI\n");
         for (int x = 0; x < MAX_X; x++)  // for each child of node
@@ -263,8 +263,8 @@ int main(int argc, char const* argv[]) {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
